@@ -27,17 +27,16 @@ function App() {
 
   const handleSubmit = async (formData) => {
     try {
-      const response = await axios.post("https://your-api-url.com/books", formData);
-      console.log("Book Created Successfully:", response.data);
-
-      // Update the table with the new book
-      setBooks([...books, { id: books.length + 1, ...formData }]);
+      const response = await axios.post("http://localhost:8000/api/books", formData);
+      console.log(response);
+      setBooks([...books, { id: response.data.id, ...formData }]);
       alert("Book created successfully!");
     } catch (error) {
       console.error("Error creating book:", error);
-      alert("Failed to create book. Please try again.");
+      alert("Failed to create book.");
     }
   };
+  
 
   const handleDelete = async (id) => {
     try {

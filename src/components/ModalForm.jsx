@@ -8,7 +8,7 @@ const ModalForm = ({ onSubmit }) => {
     author: "",
     isbn: "",
     publish_date: "",
-    status: "Available",
+    status: "Read",
   });
 
   const handleClose = () => setShow(false);
@@ -18,16 +18,16 @@ const ModalForm = ({ onSubmit }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFormSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData); // Call handleSubmit from App.js
-    handleClose();
+    onSubmit(formData); // Call parent function
+    handleClose(); // Close modal after submission
   };
 
   return (
     <div className="container mt-5">
       <button className="btn btn-primary" onClick={handleShow}>
-        Open Modal Form
+        Create Form
       </button>
 
       {show && (
@@ -39,7 +39,7 @@ const ModalForm = ({ onSubmit }) => {
                 <button type="button" className="btn-close" onClick={handleClose}></button>
               </div>
               <div className="modal-body">
-                <form onSubmit={handleFormSubmit}>
+                <form onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label className="form-label">Title</label>
                     <input
@@ -93,6 +93,7 @@ const ModalForm = ({ onSubmit }) => {
                       onChange={handleChange}
                       required
                     >
+                      <option value="Read">Read</option>
                       <option value="Available">Available</option>
                       <option value="Checked Out">Checked Out</option>
                       <option value="Reserved">Reserved</option>
